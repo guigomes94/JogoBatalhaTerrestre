@@ -43,4 +43,5 @@ public class AplicacaoSwing {
 		jogo = new JogoBatalhaTerrestreComponente();
 		jogo.setBounds(20, 20, 640, 600);
 		frame.getContentPane().add(jogo);
-}}
+	}
+}

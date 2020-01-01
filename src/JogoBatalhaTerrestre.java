@@ -9,7 +9,7 @@ public class JogoBatalhaTerrestre {
 	private int tiros = 0;
 	private int acertos = 0;
 	
-	public JogoBatalhaTerrestre() {
+	public JogoBatalhaTerrestre(){
 		Random randint = new Random();
 		
 		for (int i = 0; i < 10; i++) {
@@ -20,79 +20,33 @@ public class JogoBatalhaTerrestre {
 		
 		int i = 0;
 		while (i < 5) {
-			int x = randint.nextInt(10);
-			int y = randint.nextInt(10);
+			int x = randint.nextInt(9);
+			int y = randint.nextInt(9);
+			
+			if (x == 0 || y == 0) {
+				continue;
+			}
 			
 			if (board[x][y] == 3) {
-				board[x][y] = 1;
 				i ++;
 				
-				if (x == 0 && y == 0) {
-					board[0][1] = 2;
-					board[1][0] = 2;
-					board[1][1] = 2;
-				}
-				else if (x == 0 && y == 9) {
-					board[0][8] = 2;
-					board[1][8] = 2;
-					board[1][9] = 2;
-				}
-				else if (x == 0 && (y != 9 && y != 0)) {
-					board[0][y - 1] = 2;
-					board[0][y + 1] = 2;
-					board[1][y] = 2;
-					board[1][y - 1] = 2;
-					board[1][y + 1] = 2;
-				}
-				else if ((x != 9 && x != 0) && y == 0) {
-					board[x - 1][0] = 2;
-					board[x + 1][0] = 2;
-					board[x][1] = 2;
-					board[x - 1][1] = 2;
-					board[x + 1][1] = 2;
-				}
-				else if (x == 9 && y == 0) {
-					board[8][0] = 2;
-					board[8][1] = 2;
-					board[9][1] = 2;
-				}
-				else if (x == 9 && (y != 0 && y != 9)) {
-					board[8][y - 1] = 2;
-					board[8][y + 1] = 2;
-					board[8][y] = 2;
-					board[9][y - 1] = 2;
-					board[9][y + 1] = 2;
-				}
-				else if (x == 9 && y == 9) {
-					board[8][9] = 2;
-					board[9][8] = 2;
-					board[9][9] = 2;
-				}
-				else if ((x != 0 && x != 9) && y == 9) {
-					board[x - 1][9] = 2;
-					board[x + 1][9] = 2;
-					board[x][8] = 2;
-					board[x - 1][8] = 2;
-					board[x + 1][8] = 2;
-				}
-				else if ((x != 0 && x != 9) && (y != 0 && y != 9)) {
-					board[x][y - 1] = 2;
-					board[x][y + 1] = 2;
-					board[x - 1][y] = 2;
-					board[x + 1][y] = 2;
-					board[x - 1][y - 1] = 2;
-					board[x - 1][y + 1] = 2;
-					board[x + 1][y - 1] = 2;
-					board[x + 1][y + 1] = 2;
-				}
-				
-			}
-		}		
+				board[x][y] = 1;
+				board[x - 1][y - 1] = 2;
+				board[x - 1][y] = 2;
+				board[x - 1][y + 1] = 2;
+				board[x][y + 1] = 2;
+				board[x + 1][y + 1] = 2;
+				board[x + 1][y] = 2;
+				board[x + 1][y - 1] = 2;
+				board[x][y - 1] = 2;	
+			}	
+		}
 	}
 
 	public int[][] getBoard() {
 		return board;
 	}
+	
 	
 	private void gravar(int x, int y, String message) {
 		
@@ -240,7 +194,7 @@ public class JogoBatalhaTerrestre {
 		StringBuilder tab = new StringBuilder();
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
-				if (this.getBoard()[i][j] != 0) {
+				if (this.getBoard()[i][j] == 0) {
 					tab.append(j != 9 ? "- " : "-\n");
 				} else {
 					if (j != 9) {
